@@ -64,12 +64,24 @@ export function formatPost(post: RedditPost) {
 
 // Format comment for MCP response
 export function formatComment(comment: RedditComment): any {
+  // Handle replies - Reddit returns replies as { kind: "Listing", data: { children: [...] } }
+  let formattedReplies: any[] = [];
+  if (comment.replies && typeof comment.replies === 'object' && !Array.isArray(comment.replies)) {
+    // It's a Reddit listing object
+    const listingData = (comment.replies as any).data?.children || [];
+    formattedReplies = listingData
+      .filter((child: any) => child.kind === 't1')
+      .map((child: any) => formatComment(child.data));
+  } else if (Array.isArray(comment.replies)) {
+    formattedReplies = comment.replies.map(formatComment);
+  }
+
   return {
     author: comment.author || '[deleted]',
     body: truncate(comment.body),
     score: comment.score,
     created_utc: comment.created_utc,
-    replies: comment.replies?.map(formatComment) || [],
+    replies: formattedReplies,
   };
 }
 
