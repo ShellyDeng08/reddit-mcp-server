@@ -16,16 +16,22 @@ npx reddit-mcp-server
 
 ## Configuration
 
+### Claude Code (CLI)
+
+```bash
+claude mcp add reddit -- npx -y --registry https://registry.npmjs.org/ reddit-mcp-server
+```
+
 ### Claude Desktop
 
-Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS, `%APPDATA%\Claude\claude_desktop_config.json` on Windows):
 
 ```json
 {
   "mcpServers": {
     "reddit": {
       "command": "npx",
-      "args": ["-y", "reddit-mcp-server"]
+      "args": ["-y", "--registry", "https://registry.npmjs.org/", "reddit-mcp-server"]
     }
   }
 }
