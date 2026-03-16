@@ -29,27 +29,31 @@ export interface RedditUser {
   created_utc: number;
 }
 
-// Internal response types
-export interface PostResponse {
+// Formatted response types returned by the MCP tools
+
+export interface FormattedPost {
   title: string;
   author: string;
   score: number;
   url: string;
   permalink: string;
   selftext: string;
+  selftext_truncated?: boolean;
   num_comments: number;
   created_utc: number;
   subreddit: string;
 }
 
-export interface CommentResponse {
+export interface FormattedComment {
   author: string;
   body: string;
+  body_truncated?: boolean;
   score: number;
   created_utc: number;
+  replies: FormattedComment[];
 }
 
-export interface UserResponse {
+export interface FormattedUser {
   name: string;
   link_karma: number;
   comment_karma: number;

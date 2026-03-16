@@ -1,102 +1,73 @@
-# Reddit Connector MCP Server
+# reddit-mcp-server
 
-An MCP server that enables AI assistants to browse and summarize Reddit content using Reddit's public JSON API.
+An MCP (Model Context Protocol) server for browsing Reddit. Search posts, read comments, and view user profiles — all read-only, no authentication required.
 
 ## Installation
 
 ```bash
-npm install
-npm run build
+npm install -g reddit-mcp-server
+```
+
+Or use directly with `npx`:
+
+```bash
+npx reddit-mcp-server
 ```
 
 ## Configuration
 
-Add to your MCP client configuration (e.g., Claude Code's settings):
+### Claude Desktop
+
+Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
 
 ```json
 {
   "mcpServers": {
     "reddit": {
-      "command": "node",
-      "args": ["/path/to/reddit-connector-mcp/dist/index.js"]
+      "command": "npx",
+      "args": ["-y", "reddit-mcp-server"]
     }
   }
 }
 ```
 
-## Available Tools
+## Tools
 
-### search_posts
-Search for posts across Reddit or within a specific subreddit.
+| Tool | Description |
+|------|-------------|
+| `reddit_search_posts` | Search for posts across Reddit or within a specific subreddit |
+| `reddit_get_subreddit_posts` | Get posts from a subreddit sorted by hot, new, top, or rising |
+| `reddit_get_post_comments` | Get comments for a specific Reddit post |
+| `reddit_get_user_profile` | Get profile information for a Reddit user |
+| `reddit_get_user_posts` | Get recent posts and comments by a Reddit user |
 
-```
-Parameters:
-  - query (required): Search query
-  - subreddit (optional): Restrict search to this subreddit
-  - limit (optional): Number of results (default: 25, max: 100)
-```
+All tools support a `response_format` parameter (`json` or `markdown`).
 
-### get_subreddit_posts
-Get posts from a subreddit with optional sorting.
+### Examples
 
-```
-Parameters:
-  - subreddit (required): Subreddit name (without r/ prefix)
-  - sort (optional): hot | new | top | rising (default: hot)
-  - limit (optional): Number of posts (default: 25, max: 100)
+**Search posts:**
+```json
+{ "query": "machine learning", "subreddit": "programming", "limit": 10 }
 ```
 
-### get_hot_posts
-Shortcut for getting hot posts from a subreddit.
-
-```
-Parameters:
-  - subreddit (required): Subreddit name (without r/ prefix)
-  - limit (optional): Number of posts (default: 25, max: 100)
+**Get subreddit posts:**
+```json
+{ "subreddit": "science", "sort": "top", "limit": 5 }
 ```
 
-### get_post_comments
-Get comments for a specific Reddit post.
-
-```
-Parameters:
-  - post_url (required): Full Reddit post URL or permalink
-  - limit (optional): Number of comments (default: 25)
+**Get post comments:**
+```json
+{ "post_url": "https://www.reddit.com/r/programming/comments/abc123/my_post/" }
 ```
 
-### get_user_profile
-Get profile information for a Reddit user.
-
-```
-Parameters:
-  - username (required): Reddit username (without u/ prefix)
+**Get user profile:**
+```json
+{ "username": "spez" }
 ```
 
-### get_user_posts
-Get recent posts and comments by a Reddit user.
-
-```
-Parameters:
-  - username (required): Reddit username (without u/ prefix)
-  - limit (optional): Number of items (default: 25, max: 100)
-```
-
-## Example Usage
-
-```typescript
-// Search for AI discussions
-search_posts({ query: "AI startups", limit: 10 })
-
-// Get hot posts from r/technology
-get_hot_posts({ subreddit: "technology", limit: 20 })
-
-// Get comments on a post
-get_post_comments({
-  post_url: "https://reddit.com/r/startups/comments/abc123/my_post/"
-})
-
-// Get user info
-get_user_profile({ username: "spez" })
+**Get user posts:**
+```json
+{ "username": "spez", "limit": 10 }
 ```
 
 ## Notes
@@ -104,4 +75,18 @@ get_user_profile({ username: "spez" })
 - Uses Reddit's public JSON endpoints — no API key required
 - Rate limited by Reddit (~60 requests/minute for unauthenticated access)
 - Automatic retry with exponential backoff on 429/5xx errors
-- Text content truncated to 500 characters to minimize token usage
+- 30-second request timeout
+- Text content truncated to minimize token usage
+- Large responses truncated at 25,000 characters
+
+## Development
+
+```bash
+npm install
+npm run build
+npm start
+```
+
+## License
+
+MIT
