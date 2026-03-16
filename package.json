@@ -1,6 +1,6 @@
 {
   "name": "reddit-mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for browsing Reddit content — search posts, read comments, and view user profiles via the Model Context Protocol",
   "main": "dist/index.js",
   "bin": {
