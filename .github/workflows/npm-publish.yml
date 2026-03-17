@@ -17,4 +17,4 @@ jobs:
       - run: npm run build
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_NO_2FA }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
