@@ -12,7 +12,7 @@ import {
 } from './reddit-client.js';
 
 const server = new McpServer({
-  name: 'reddit-mcp-server',
+  name: 'reddit-connector-mcp',
   version: '1.0.0',
 });
 

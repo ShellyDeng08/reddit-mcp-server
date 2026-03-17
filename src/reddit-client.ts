@@ -7,7 +7,7 @@ import type {
   FormattedUser,
 } from './types.js';
 
-const USER_AGENT = 'reddit-mcp-server/1.0';
+const USER_AGENT = 'reddit-connector-mcp/1.0';
 const BASE_URL = 'https://www.reddit.com';
 const MAX_RETRIES = 3;
 const REQUEST_TIMEOUT_MS = 30_000;

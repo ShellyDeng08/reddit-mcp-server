@@ -1,12 +1,12 @@
-# reddit-mcp-server
+# reddit-connector-mcp
 
-[![npm version](https://img.shields.io/npm/v/reddit-mcp-server.svg)](https://www.npmjs.com/package/reddit-mcp-server)
-[![license](https://img.shields.io/npm/l/reddit-mcp-server.svg)](https://github.com/ShellyDeng08/reddit-mcp-server/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/reddit-connector-mcp.svg)](https://www.npmjs.com/package/reddit-connector-mcp)
+[![license](https://img.shields.io/npm/l/reddit-connector-mcp.svg)](https://github.com/ShellyDeng08/reddit-connector-mcp/blob/master/LICENSE)
 
 A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that lets AI assistants browse Reddit. Search posts, read comments, and view user profiles — no API key required.
 
-<a href="https://glama.ai/mcp/servers/@ShellyDeng08/reddit-mcp-server">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/@ShellyDeng08/reddit-mcp-server/badge" alt="reddit-mcp-server MCP server" />
+<a href="https://glama.ai/mcp/servers/@ShellyDeng08/reddit-connector-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@ShellyDeng08/reddit-connector-mcp/badge" alt="reddit-connector-mcp MCP server" />
 </a>
 
 ## Features
@@ -24,7 +24,7 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server that l
 ### Claude Code (CLI)
 
 ```bash
-claude mcp add reddit -- npx -y reddit-mcp-server
+claude mcp add reddit -- npx -y reddit-connector-mcp
 ```
 
 ### Claude Desktop
@@ -36,7 +36,7 @@ Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.
   "mcpServers": {
     "reddit": {
       "command": "npx",
-      "args": ["-y", "reddit-mcp-server"]
+      "args": ["-y", "reddit-connector-mcp"]
     }
   }
 }
@@ -49,7 +49,7 @@ Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.
   "mcpServers": {
     "reddit": {
       "command": "npx",
-      "args": ["-y", "reddit-mcp-server"]
+      "args": ["-y", "reddit-connector-mcp"]
     }
   }
 }
@@ -58,7 +58,7 @@ Add to your config (`~/Library/Application Support/Claude/claude_desktop_config.
 ### Install Globally (Optional)
 
 ```bash
-npm install -g reddit-mcp-server
+npm install -g reddit-connector-mcp
 ```
 
 ## Tools
@@ -113,8 +113,8 @@ This server uses Reddit's public `.json` endpoints (e.g., `reddit.com/r/programm
 ## Development
 
 ```bash
-git clone https://github.com/ShellyDeng08/reddit-mcp-server.git
-cd reddit-mcp-server
+git clone https://github.com/ShellyDeng08/reddit-connector-mcp.git
+cd reddit-connector-mcp
 npm install
 npm run build
 npm start
