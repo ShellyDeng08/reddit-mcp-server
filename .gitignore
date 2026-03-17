@@ -6,4 +6,3 @@ dist/
 .env
 .claude/
 .mcp.json
-docs/
